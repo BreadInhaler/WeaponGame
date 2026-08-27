@@ -8,7 +8,8 @@ class WeaponController : MonoBehaviour{
     public WeaponData selectedWeapon;
     public Dictionary<StatType,float> finalStats = new Dictionary<StatType, float>();
     public byte attackIndex = 0;
-    public float timer = 0;
+    public float chargeTimer = 0;
+    public byte maxChargeTimer = 1;
     public GameObject pivotTransform;
     public InputAction fireInput;
     public InputAction switchWeaponInput;
@@ -19,7 +20,7 @@ class WeaponController : MonoBehaviour{
         switchWeaponInput.Enable();
     }
     public void Update(){
-        if(fireInput.WasPressedThisFrame()) HandleFire(selectedWeapon);
+        HandleFire(selectedWeapon);
         if(switchWeaponInput.WasPressedThisFrame()) SwitchWeapon();
     }
     public void SwitchWeapon(){
@@ -44,10 +45,9 @@ class WeaponController : MonoBehaviour{
         }else{
             attackIndex = 0;
             FireMelle(weapon);
-        } 
+        }
     }
     private void FireRanged(RangedWeaponData weapon){
-        print("firedRanged");
         GameObject pivotObject = pivotTransform.GetComponentInChildren<SpriteRenderer>().gameObject;
         GameObject projectile = Instantiate(
             weapon.projectilePrefabs[0],
@@ -56,22 +56,30 @@ class WeaponController : MonoBehaviour{
         );
         if(finalStats.Count==0){
             Projectile proj = projectile.GetComponent<Projectile>();
-            proj.damage = weapon.damage;
-            proj.speed = weapon.speed;
-            proj.peirce = weapon.pierce;
-            proj.homingStrenght = weapon.homingStrenght;
+            proj.damage = weapon.damage*weapon.chargeModifier[StatType.damage];
+            proj.speed = weapon.speed*weapon.chargeModifier[StatType.speed];
+            proj.peirce = weapon.pierce*weapon.chargeModifier[StatType.peirce];
+            proj.homingStrenght = weapon.homingStrenght*weapon.chargeModifier[StatType.homingStrenght];
             proj.lifeTime = weapon.lifeTime;
-            proj.afterEffectSize = weapon.afterEffectSize;
+            proj.afterEffectSize = weapon.afterEffectSize*weapon.chargeModifier[StatType.afterEffectSize];
             proj.Init();
         }
     }
     public void HandleFire(WeaponData weapon){
         switch(weapon.fireMode){
             case FireMode.AutoFire:
-                if(weapon.GetType() == melleWeapon.GetType()) FireMelle(weapon as MelleWeaponData);
-                else FireRanged(weapon as RangedWeaponData);
+                if(fireInput.WasPressedThisFrame()) {
+                    if(weapon.GetType() == melleWeapon.GetType()) FireMelle(weapon as MelleWeaponData);
+                    else FireRanged(weapon as RangedWeaponData);
+                }
                 break;
             case FireMode.Charge:
+                if(fireInput.IsPressed()) chargeTimer+=Time.deltaTime;
+                if(fireInput.WasReleasedThisFrame()){
+                    if(weapon is MelleWeaponData chargedMelle) if(chargeTimer>=chargedMelle.chargeTime) FireMelle(melleWeapon);
+                    if(weapon is RangedWeaponData rangedWeapon) if(chargeTimer>=rangedWeapon.chargeTime) FireRanged(rangedWeapon);
+                    chargeTimer=0;
+                }
                 break;
             default:
                 break;

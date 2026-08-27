@@ -313,11 +313,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d201fe60580854849a7be9dcd749eb6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponController
-  rangedWeapon: {fileID: 11400000, guid: db02d5c4d31abe64e85d4c8fe40b4ee0, type: 2}
+  rangedWeapon: {fileID: 11400000, guid: ea87bbb29eec9f748808b6e9c384e8bd, type: 2}
   melleWeapon: {fileID: 11400000, guid: 88c20c48876129f4091db2ad3814d3fb, type: 2}
-  selectedWeapon: {fileID: 11400000, guid: db02d5c4d31abe64e85d4c8fe40b4ee0, type: 2}
+  selectedWeapon: {fileID: 11400000, guid: ea87bbb29eec9f748808b6e9c384e8bd, type: 2}
   attackIndex: 0
-  timer: 0
+  chargeTimer: 0
+  maxChargeTimer: 1
   pivotTransform: {fileID: 1069449502}
   fireInput:
     m_Name: Fire Input
