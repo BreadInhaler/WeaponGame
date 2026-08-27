@@ -16,13 +16,27 @@ MonoBehaviour:
   sprite: {fileID: 0}
   damage: 1
   firerate: 1
-  fireMode: 2
+  fireMode: 1
   altFireMode: 0
+  chargeTime: 1
+  modifiers:
+  - statType: 0
+    value: 1
+  - statType: 3
+    value: 10
+  - statType: 1
+    value: 1
+  - statType: 4
+    value: 1
+  - statType: 6
+    value: 1
+  - statType: 7
+    value: 1
   projectilePrefabs:
   - {fileID: 5148231237616894681, guid: d09dce2fabc717f47a807a19b83f9d74, type: 3}
   speed: 1
-  homingStrenght: 0
-  projectileCount: 0
+  homingStrenght: 1
+  projectileCount: 1
   pierce: 10
   lifeTime: 10
-  afterEffectSize: 0
+  afterEffectSize: 1
