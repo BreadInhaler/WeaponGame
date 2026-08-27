@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aebffd31aff47424fbb7dc79d49d2830, type: 3}
+  m_Name: MelleWeapon
+  m_EditorClassIdentifier: Assembly-CSharp::MelleWeaponData
+  id: sword
+  sprite: {fileID: 0}
+  damage: 1
+  firerate: 1
+  fireMode: 2
+  altFireMode: 0
+  size: 2
+  attackSequence:
+  - {fileID: 11400000, guid: 3cf6603878d99194f9af469380e97171, type: 2}
+  - {fileID: 11400000, guid: f07b4abf979f3f343b8878c8255bf830, type: 2}
