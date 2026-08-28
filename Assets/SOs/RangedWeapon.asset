@@ -15,9 +15,10 @@ MonoBehaviour:
   id: bow
   sprite: {fileID: 0}
   damage: 1
+  lifeSteal: 0
   firerate: 1
   fireMode: 1
-  altFireMode: 0
+  altFireMode: 2
   chargeTime: 1
   modifiers:
   - statType: 0

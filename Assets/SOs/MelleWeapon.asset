@@ -15,23 +15,16 @@ MonoBehaviour:
   id: sword
   sprite: {fileID: 0}
   damage: 1
+  lifeSteal: 0
   firerate: 1
   fireMode: 2
-  altFireMode: 0
+  altFireMode: 1
   chargeTime: 1
   modifiers:
   - statType: 0
     value: 1
-  - statType: 3
-    value: 1
-  - statType: 1
-    value: 1
-  - statType: 4
-    value: 1
-  - statType: 6
-    value: 1
-  - statType: 7
-    value: 1
+  - statType: 2
+    value: 2
   size: 2
   attackSequence:
   - {fileID: 11400000, guid: 3cf6603878d99194f9af469380e97171, type: 2}

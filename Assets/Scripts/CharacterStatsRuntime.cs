@@ -1,4 +1,4 @@
-using UnityEngine;
+[System.Serializable]
 public class CharacterStatsRuntime{
     public float currentHP;
     public float maxHP;
