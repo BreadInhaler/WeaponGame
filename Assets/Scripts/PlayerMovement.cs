@@ -7,9 +7,12 @@ public class PlayerMovement : MonoBehaviour{
     Vector2 velocity = new Vector2();
     InputAction moveInput;
     Rigidbody2D body;
+    Player player;
     void Start(){
-        moveInput = InputSystem.actions.FindAction("Move");
-        moveInput.Enable();
+        /*moveInput = InputSystem.actions.FindAction("Move");
+        moveInput.Enable();*/
+        player = GetComponent<Player>();
+        moveInput = player.playerInput.actions.FindAction("Move");
         body = gameObject.GetComponent<Rigidbody2D>();
         speed = gameObject.GetComponent<Player>().stats.speed;
     }

@@ -1,6 +1,7 @@
 using UnityEngine; 
 
 class Projectile : MonoBehaviour{
+    public Player player;
     public Sprite sprite;
     public GameObject afterEffect;
     public float lifeTime;
@@ -28,6 +29,7 @@ class Projectile : MonoBehaviour{
     }
     protected virtual void OnHitCharacter(Character character){
         character.TakeDamage(damage);
+        player.RecieveHeal(player.weaponController.selectedWeapon.lifeSteal*damage);
     }
     protected virtual void OnTriggerEnter(Collider collider){
         Character character = collider.GetComponent<Character>();

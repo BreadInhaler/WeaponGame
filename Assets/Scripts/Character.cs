@@ -17,4 +17,8 @@ public abstract class Character : MonoBehaviour{
         if(finalDamage<1) stats.currentHP-=1;
         else stats.currentHP-=finalDamage;
     }
+    public void RecieveHeal(float amount){
+        stats.currentHP+=amount;
+        if(stats.currentHP>stats.maxHP) stats.currentHP=stats.maxHP;
+    }
 }
