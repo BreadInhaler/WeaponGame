@@ -7,6 +7,9 @@ class Player : Character{
     public byte playerIndex;
     [HideInInspector] public PlayerInput playerInput;
     [HideInInspector] public WeaponController weaponController;
+    private InputAction testInput;
+    [HideInInspector]public InputAction menuInput;
+    public GameMenuManager gameMenu;
     public override void Awake(){
         base.Awake();
         playerInput=GetComponent<PlayerInput>();
@@ -24,11 +27,16 @@ class Player : Character{
                 playerInput.SwitchCurrentControlScheme("Gamepad", gamepad);
             }
         }
+        testInput = playerInput.actions.FindAction("Test");
+        testInput.Enable();
+        menuInput = playerInput.actions.FindAction("Menu");
+        menuInput.Enable();
     }
     public void LoadPlayer(string id){
         return;
     }
     public void Update(){
-        
+        if(testInput.WasPressedThisFrame()) Camera.main.GetComponent<CameraShake>().Shake(0.1f,0.05f);
+        if(menuInput.WasPressedThisFrame()) gameMenu.ToggleMenu(this);
     }
 }

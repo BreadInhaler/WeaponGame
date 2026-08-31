@@ -12,6 +12,7 @@ class WeaponPivotController : MonoBehaviour{
         aimAction = playerInput.actions.FindAction("Look");
     }
     public void Update(){
+        if(GameManager.Instance.IsPaused())return;
         float angle;
         if (playerInput.currentControlScheme == "Gamepad"){
             Vector2 stickDir = aimAction.ReadValue<Vector2>();

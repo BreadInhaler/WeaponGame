@@ -10,22 +10,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aebffd31aff47424fbb7dc79d49d2830, type: 3}
-  m_Name: MelleWeapon
+  m_Name: Scythe
   m_EditorClassIdentifier: Assembly-CSharp::MelleWeaponData
-  id: sword
-  sprite: {fileID: 0}
-  damage: 1
-  lifeSteal: 0
+  id: scythe
+  sprite: {fileID: 21300000, guid: b566b4d22da6cd342979e2bd37318934, type: 3}
+  damage: 10
+  lifeSteal: 0.1
   firerate: 1
   fireMode: 2
-  altFireMode: 1
+  altFireMode: 0
   chargeTime: 1
   modifiers:
   - statType: 0
     value: 1
-  - statType: 2
-    value: 2
-  size: 2
+  - statType: 3
+    value: 1
+  - statType: 1
+    value: 1
+  - statType: 4
+    value: 1
+  - statType: 6
+    value: 1
+  - statType: 7
+    value: 1
+  size: 1
   attackSequence:
+  - {fileID: 11400000, guid: 3cf6603878d99194f9af469380e97171, type: 2}
   - {fileID: 11400000, guid: 3cf6603878d99194f9af469380e97171, type: 2}
   - {fileID: 11400000, guid: f07b4abf979f3f343b8878c8255bf830, type: 2}

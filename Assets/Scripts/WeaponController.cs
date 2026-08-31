@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Users;
 class WeaponController : MonoBehaviour{
     public RangedWeaponData rangedWeapon;
     public MelleWeaponData melleWeapon;
@@ -9,16 +8,21 @@ class WeaponController : MonoBehaviour{
     [HideInInspector] public Dictionary<StatType,float> finalStats = new Dictionary<StatType, float>();
     [HideInInspector] public byte attackIndex = 0;
     public float chargeTimer = 0;
+    public float attackSpeedTimer= 0;
     public GameObject pivotTransform;
+    private GameObject pivotObject;
+    private SpriteRenderer weaponHeld;
     [HideInInspector] public InputAction fireInput;
     [HideInInspector] public InputAction altFireInput;
     [HideInInspector] public InputAction switchWeaponInput;
     [HideInInspector] public Player player;
     
-    
     public void Start(){
         player=GetComponent<Player>();
-        selectedWeapon = melleWeapon;
+        selectedWeapon = rangedWeapon;
+        pivotObject = pivotTransform.GetComponentInChildren<SpriteRenderer>().gameObject;
+        weaponHeld = player.GetComponentsInChildren<SpriteRenderer>()[2];
+        SwitchWeapon();
         /*fireInput = InputSystem.actions.FindAction("Fire");
         fireInput.Enable();
         altFireInput = InputSystem.actions.FindAction("AltFire");
@@ -33,6 +37,7 @@ class WeaponController : MonoBehaviour{
         switchWeaponInput.Enable();
     }
     public void Update(){
+        if(GameManager.Instance.IsPaused()) return;
         HandleFire(selectedWeapon.fireMode,fireInput);
         if(selectedWeapon.altFireMode!=FireMode.None) HandleFire(selectedWeapon.altFireMode,altFireInput);
         if(switchWeaponInput.WasPressedThisFrame()) SwitchWeapon();
@@ -40,30 +45,34 @@ class WeaponController : MonoBehaviour{
     public void SwitchWeapon(){
         if(selectedWeapon == melleWeapon) selectedWeapon = rangedWeapon; 
         else selectedWeapon = melleWeapon;
+        weaponHeld.sprite=selectedWeapon.sprite;
     }
     public void Fire(WeaponData weapon){
         return;
     }
     private void FireMelle(MelleWeaponData weapon,FireMode fireMode){
         if(attackIndex >= weapon.attackSequence.Count) attackIndex = 0;
-        GameObject pivotObject = pivotTransform.GetComponentInChildren<SpriteRenderer>().gameObject;
+        Vector3 offset = new Vector3(0,0f,0);
+        Vector3 offsetPos = pivotObject.transform.position+pivotObject.transform.rotation * offset;
         GameObject projectile = Instantiate(
             weapon.attackSequence[attackIndex].attackType,
-            pivotObject.transform.position,
+            offsetPos,
             pivotObject.transform.rotation
         );
+        Camera.main.GetComponent<CameraShake>().Shake(0.1f,0.05f);
         Projectile proj = projectile.GetComponent<Projectile>();
         if(fireMode==FireMode.Charge){
             proj.damage = weapon.damage*weapon.chargeModifier[StatType.damage];
-            proj.gameObject.transform.localScale = new Vector3(weapon.size*weapon.chargeModifier[StatType.size],weapon.size*weapon.chargeModifier[StatType.size],1);
+            proj.gameObject.transform.localScale = new Vector3(proj.gameObject.transform.localScale.x*weapon.size*weapon.chargeModifier[StatType.size],proj.gameObject.transform.localScale.x*weapon.size*weapon.chargeModifier[StatType.size],1);
         }else{
             proj.damage = weapon.damage;
-            proj.gameObject.transform.localScale = new Vector3(weapon.size,weapon.size,1);
+            proj.gameObject.transform.localScale = new Vector3(proj.gameObject.transform.localScale.x*weapon.size,proj.gameObject.transform.localScale.x*weapon.size,1);
         }
+        //print("melle damage -> "+proj.damage);
+        proj.player = player;
         attackIndex++;
     }
     private void FireRanged(RangedWeaponData weapon,FireMode fireMode){
-        GameObject pivotObject = pivotTransform.GetComponentInChildren<SpriteRenderer>().gameObject;
         GameObject projectile = Instantiate(
             weapon.projectilePrefabs[0],
             pivotObject.transform.position,
@@ -88,15 +97,21 @@ class WeaponController : MonoBehaviour{
             }
         }
         proj.lifeTime = weapon.lifeTime;
+        proj.player = player;
         proj.Init();
     }
     public void HandleFire(FireMode fireMode , InputAction input){
         switch(fireMode){
             case FireMode.AutoFire:
-                if(input.WasPressedThisFrame()) {
-                    if(selectedWeapon.GetType() == melleWeapon.GetType()) FireMelle(selectedWeapon as MelleWeaponData,fireMode);
-                    else FireRanged(selectedWeapon as RangedWeaponData,fireMode);
+                if(input.IsPressed()) {
+                    attackSpeedTimer+=Time.deltaTime;
+                    if(attackSpeedTimer>=selectedWeapon.firerate){
+                        attackSpeedTimer=0;
+                        if(selectedWeapon.GetType() == melleWeapon.GetType()) FireMelle(selectedWeapon as MelleWeaponData,fireMode);
+                        else FireRanged(selectedWeapon as RangedWeaponData,fireMode);
+                    }
                 }
+                if(input.WasReleasedThisFrame()) attackSpeedTimer=selectedWeapon.firerate;
                 break;
             case FireMode.Charge:
                 if(input.IsPressed()) chargeTimer+=Time.deltaTime;

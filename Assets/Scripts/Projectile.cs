@@ -27,16 +27,18 @@ class Projectile : MonoBehaviour{
         timer+=Time.deltaTime;
         if(timer>=lifeTime) Die();
     }
-    protected virtual void OnHitCharacter(Character character){
+    protected virtual void OnHit(Idamageable character){
         character.TakeDamage(damage);
+        if(player==null) return;
         player.RecieveHeal(player.weaponController.selectedWeapon.lifeSteal*damage);
     }
-    protected virtual void OnTriggerEnter(Collider collider){
-        Character character = collider.GetComponent<Character>();
-        if(character!=null) OnHitCharacter(character);
+    protected virtual void OnTriggerEnter2D(Collider2D collider){
+        print(collider.name);
+        Idamageable character = collider.GetComponent<Idamageable>();
+        if(peirce<=0) Die();
+        if(character!=null) OnHit(character);
         else Die();
         peirce--;
-        if(peirce<=0) Die();
     }
     private void Die(){
         if(afterEffect!=null) afterEffect.SetActive(true);

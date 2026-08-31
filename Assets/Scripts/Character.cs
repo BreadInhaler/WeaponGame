@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class Character : MonoBehaviour{
+public abstract class Character : MonoBehaviour , Idamageable{
     public CharacterStatsRuntime stats; 
     public CharacterStats baseStats;
     public virtual void Awake(){

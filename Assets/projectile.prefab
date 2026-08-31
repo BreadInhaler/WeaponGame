@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2533440821516001468}
   - component: {fileID: 7488372438344695247}
   - component: {fileID: 8350256253712778466}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,12 +46,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac7690fe44b7a914ca31385e1f999218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
+  player: {fileID: 0}
   sprite: {fileID: 0}
   afterEffect: {fileID: 0}
   lifeTime: 0
   peirce: 0
   speed: 1
   damage: 0
+  homingStrenght: 0
   afterEffectSize: 0
   timer: 0
 --- !u!61 &8350256253712778466
@@ -110,7 +112,7 @@ GameObject:
   m_Component:
   - component: {fileID: 746487400040016084}
   - component: {fileID: 4819861022518762857}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
