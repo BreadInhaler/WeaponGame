@@ -19,6 +19,7 @@ public class CustomButton : MonoBehaviour
             Camera cam = root.GetComponent<Camera>();
             if(cam!=null) if(cam != Camera.main) target = cam;
         }
+        if(target==null) target=Camera.main;
     }
     void Update(){
         if(Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame){

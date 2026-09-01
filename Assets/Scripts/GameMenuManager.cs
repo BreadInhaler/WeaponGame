@@ -14,7 +14,7 @@ class GameMenuManager : MonoBehaviour{
         pauseButtons[0].onClick.AddListener(()=>Resume()); 
         navigator = menuPanel.GetComponentInChildren<MenuNavigator>();
         navigator.buttons = pauseButtons;
-        ArrangeButtonsVertically();
+        //ArrangeButtonsVertically();
     }
     void Resume(){
         ToggleMenu(player);
