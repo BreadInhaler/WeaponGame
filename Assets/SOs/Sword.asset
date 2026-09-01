@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: Assembly-CSharp::MelleWeaponData
   id: sword
-  sprite: {fileID: 21300000, guid: 27e2bf2a4137e5f44af306ea12a049fc, type: 3}
+  sprite: {fileID: 21300000, guid: 16b471586f4becc48a68bd8561694af6, type: 3}
   damage: 10
   lifeSteal: 0
   firerate: 0.2

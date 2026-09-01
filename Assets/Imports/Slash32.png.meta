@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 4173f44c2bbfe71408c2164f38a067bc
+guid: 927463ad7d771ea44ab1bb302a3b9d32
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4176362632249098406
-    second: Slash_0
+      213: 2683556277060384239
+    second: Slash32_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -72,7 +72,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 128
+    maxTextureSize: 32
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Slash_0
+      name: Slash32_0
       rect:
         serializedVersion: 2
-        x: 16
-        y: 1
-        width: 26
-        height: 58
+        x: 6
+        y: 0
+        width: 17
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6a04c6ccfab65f930800000000000000
-      internalID: 4176362632249098406
+      spriteID: fe534f44738ed3520800000000000000
+      internalID: 2683556277060384239
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Slash_0: 4176362632249098406
+      Slash32_0: 2683556277060384239
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

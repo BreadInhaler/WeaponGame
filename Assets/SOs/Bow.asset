@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bow
   m_EditorClassIdentifier: Assembly-CSharp::RangedWeaponData
   id: bow
-  sprite: {fileID: 21300000, guid: b5ee442a645749e4284a787329791913, type: 3}
+  sprite: {fileID: 21300000, guid: 735fe3abf82e319499829af4e5fe65dd, type: 3}
   damage: 1
   lifeSteal: 0
   firerate: 0.3

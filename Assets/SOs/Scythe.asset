@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Scythe
   m_EditorClassIdentifier: Assembly-CSharp::MelleWeaponData
   id: scythe
-  sprite: {fileID: 21300000, guid: b566b4d22da6cd342979e2bd37318934, type: 3}
+  sprite: {fileID: 21300000, guid: 95bedc2cb43b51e44bbaffe40e1f8e6c, type: 3}
   damage: 10
   lifeSteal: 0.1
   firerate: 1
