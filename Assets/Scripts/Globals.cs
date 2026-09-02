@@ -1,7 +1,7 @@
-static class Globals{
+public static class Globals{
     public static byte save=1; 
 }
-enum StatType{
+public enum StatType{
     damage, 
     firerate, 
     size, 
@@ -12,7 +12,7 @@ enum StatType{
     afterEffectSize,
     prefabIndex
 }
-enum FireMode{
+public enum FireMode{
     None,
     Charge,
     AutoFire

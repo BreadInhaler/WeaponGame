@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-class WeaponData : ScriptableObject{
+public class WeaponData : ScriptableObject{
     public string id;
     public Sprite sprite;
     public float damage;
@@ -36,7 +36,7 @@ class WeaponData : ScriptableObject{
     }
 }
 [System.Serializable]
-struct StatModifier {
+public struct StatModifier {
     public StatType statType;
     public float value;
     public StatModifier(StatType statType, float amount){

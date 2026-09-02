@@ -9,7 +9,7 @@ class profilesMenuController : MonoBehaviour{
             byte index = i;
             CustomButton[] buttons = profiles[i].GetComponentsInChildren<CustomButton>(true);
             print("amount of buttons -> "+buttons.Length);
-            SaveData data = SaveSystem.LoadGame(i);
+            SaveData data = SaveSystem.LoadGameData(i);
             if(data==null){
                 buttons[2].onClick.AddListener(()=>CreateNewProfile(index));
             }
@@ -32,10 +32,9 @@ class profilesMenuController : MonoBehaviour{
     void CreateNewProfile(byte id){
         SaveData data = new SaveData();
         data.playerProfile = new PlayerSaveData();
-        data.playerProfile.id = id;
-        data.playerProfile.name = "Player "+id;
-        data.globalUnlocks = new GlobalSaveData();
-        SaveSystem.SaveGame(data,id);
+        data.playerProfile.id = (byte)(id+1);
+        data.playerProfile.name = "Player "+(byte)(id+1);
+        SaveSystem.SaveGameData(data,(byte)(id+1));
     }
     void Back(){
         FindAnyObjectByType<MainMenuController>().menu.SetActive(true);

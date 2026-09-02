@@ -7,6 +7,7 @@ class MainMenuController : MonoBehaviour{
     public GameObject profilesMenu;
     CustomButton[] menuButtons;
     void Start(){
+        if(SaveSystem.LoadGlobalData()==null) SaveSystem.SaveGlobalData(new GlobalSaveData());
         menu.SetActive(true);
         profilesMenu.SetActive(false);
         menuButtons = menu.GetComponentsInChildren<CustomButton>();

@@ -5,6 +5,7 @@ using UnityEngine;
 
 class Player : Character{
     public byte playerIndex;
+    public byte playerID;
     [HideInInspector] public PlayerInput playerInput;
     [HideInInspector] public WeaponController weaponController;
     private InputAction testInput;
@@ -27,16 +28,18 @@ class Player : Character{
                 playerInput.SwitchCurrentControlScheme("Gamepad", gamepad);
             }
         }
-        testInput = playerInput.actions.FindAction("Test");
-        testInput.Enable();
+        //testInput = playerInput.actions.FindAction("Test");
+        //testInput.Enable();
         menuInput = playerInput.actions.FindAction("Menu");
         menuInput.Enable();
+
+        
     }
     public void LoadPlayer(string id){
         return;
     }
     public void Update(){
-        if(testInput.WasPressedThisFrame()) Camera.main.GetComponent<CameraShake>().Shake(0.1f,0.05f);
+        //if(testInput.WasPressedThisFrame()) Camera.main.GetComponent<CameraShake>().Shake(0.1f,0.05f);
         if(menuInput.WasPressedThisFrame()) gameMenu.ToggleMenu(this);
     }
 }

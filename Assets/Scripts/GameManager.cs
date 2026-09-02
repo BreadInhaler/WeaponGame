@@ -12,6 +12,7 @@ class GameManager : MonoBehaviour{
         }
         Instance = this;
         Init();
+        LookUpResources.Init();
         //DontDestroyOnLoad(gameObject);
     }
     void Init(){

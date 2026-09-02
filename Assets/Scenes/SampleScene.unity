@@ -277,7 +277,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7796315908622725331, guid: 7d57a83b9ccb11b4c8f7b6a77ada1f16, type: 3}
       propertyPath: m_fontSize
-      value: 1.55
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7796315908622725331, guid: 7d57a83b9ccb11b4c8f7b6a77ada1f16, type: 3}
       propertyPath: m_fontSizeMin
@@ -348,6 +348,7 @@ MonoBehaviour:
     speed: 0
   baseStats: {fileID: 11400000, guid: d56a35c40a25d7e4c845c1712e1e10c1, type: 2}
   playerIndex: 0
+  playerID: 1
   playerInput: {fileID: 0}
   weaponController: {fileID: 425747711}
   menuInput:
@@ -417,8 +418,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d201fe60580854849a7be9dcd749eb6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponController
-  rangedWeapon: {fileID: 11400000, guid: db02d5c4d31abe64e85d4c8fe40b4ee0, type: 2}
-  melleWeapon: {fileID: 11400000, guid: 398a5dbbd86ffa74bbd1fe75c35eb9f1, type: 2}
   selectedWeapon: {fileID: 11400000, guid: db02d5c4d31abe64e85d4c8fe40b4ee0, type: 2}
   attackIndex: 0
   chargeTimer: 0
@@ -1729,7 +1728,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7796315908622725331, guid: 7d57a83b9ccb11b4c8f7b6a77ada1f16, type: 3}
       propertyPath: m_fontSize
-      value: 2.75
+      value: 2.7
       objectReference: {fileID: 0}
     - target: {fileID: 7796315908622725331, guid: 7d57a83b9ccb11b4c8f7b6a77ada1f16, type: 3}
       propertyPath: m_TextWrappingMode
@@ -1949,7 +1948,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7796315908622725331, guid: 7d57a83b9ccb11b4c8f7b6a77ada1f16, type: 3}
       propertyPath: m_fontSize
-      value: 2.15
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7796315908622725331, guid: 7d57a83b9ccb11b4c8f7b6a77ada1f16, type: 3}
       propertyPath: m_TextWrappingMode

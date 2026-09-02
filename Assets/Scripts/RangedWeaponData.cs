@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(menuName = "Weapon/RangedWeapon")]
-class RangedWeaponData : WeaponData{
+public class RangedWeaponData : WeaponData{
     public List<GameObject> projectilePrefabs;
     public float speed;
     public float homingStrenght;

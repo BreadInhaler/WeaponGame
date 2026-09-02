@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 class WeaponController : MonoBehaviour{
-    public RangedWeaponData rangedWeapon;
-    public MelleWeaponData melleWeapon;
+    private RangedWeaponData rangedWeapon;
+    private MelleWeaponData melleWeapon;
     [HideInInspector] public WeaponData selectedWeapon;
     [HideInInspector] public Dictionary<StatType,float> finalStats = new Dictionary<StatType, float>();
     [HideInInspector] public byte attackIndex = 0;
@@ -19,6 +19,9 @@ class WeaponController : MonoBehaviour{
     
     public void Start(){
         player=GetComponent<Player>();
+        SaveData data = SaveSystem.LoadGameData(player.playerID);
+        melleWeapon = LookUpResources.GetMelleWeaponByID(data.playerProfile.melleWeapon);
+        rangedWeapon = LookUpResources.GetRangedWeaponByID(data.playerProfile.rangedWeapon);
         selectedWeapon = rangedWeapon;
         pivotObject = pivotTransform.GetComponentInChildren<SpriteRenderer>().gameObject;
         weaponHeld = player.GetComponentsInChildren<SpriteRenderer>()[2];
@@ -41,6 +44,7 @@ class WeaponController : MonoBehaviour{
         HandleFire(selectedWeapon.fireMode,fireInput);
         if(selectedWeapon.altFireMode!=FireMode.None) HandleFire(selectedWeapon.altFireMode,altFireInput);
         if(switchWeaponInput.WasPressedThisFrame()) SwitchWeapon();
+        attackSpeedTimer+=Time.deltaTime;
     }
     public void SwitchWeapon(){
         if(selectedWeapon == melleWeapon) selectedWeapon = rangedWeapon; 
@@ -101,17 +105,16 @@ class WeaponController : MonoBehaviour{
         proj.Init();
     }
     public void HandleFire(FireMode fireMode , InputAction input){
+        print(Time.timeScale+" x fast");
         switch(fireMode){
             case FireMode.AutoFire:
                 if(input.IsPressed()) {
-                    attackSpeedTimer+=Time.deltaTime;
                     if(attackSpeedTimer>=selectedWeapon.firerate){
                         attackSpeedTimer=0;
                         if(selectedWeapon.GetType() == melleWeapon.GetType()) FireMelle(selectedWeapon as MelleWeaponData,fireMode);
                         else FireRanged(selectedWeapon as RangedWeaponData,fireMode);
                     }
                 }
-                if(input.WasReleasedThisFrame()) attackSpeedTimer=selectedWeapon.firerate;
                 break;
             case FireMode.Charge:
                 if(input.IsPressed()) chargeTimer+=Time.deltaTime;
