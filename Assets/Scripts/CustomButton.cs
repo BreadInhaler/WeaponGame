@@ -3,15 +3,14 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class CustomButton : MonoBehaviour
-{
+public class CustomButton : MonoBehaviour{
     public SpriteRenderer sr;
     public Color normalColor = Color.white;
     public Color highlightedColor = Color.yellow;
     public UnityEvent onClick;
     private Camera target;
-
     private bool isHighlighted;
+    private static int lastConsumedFrame = -1; // shared across ALL buttons
     void Awake(){
         sr = GetComponentInChildren<SpriteRenderer>();
         SetHighlighted(false);
@@ -22,17 +21,19 @@ public class CustomButton : MonoBehaviour
         if(target==null) target=Camera.main;
     }
     void Update(){
-        if(Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame){
-            Debug.Log("Mouse button pressed"); // 1
-            Vector2 mouseScreenPos = Mouse.current.position.ReadValue();
-            Vector2 mouseWorldPos = target.ScreenToWorldPoint(mouseScreenPos);
-            Debug.Log("World pos: " + mouseWorldPos); // 2
-            Collider2D hit = Physics2D.OverlapPoint(mouseWorldPos);
-            Debug.Log("Hit: " + (hit != null ? hit.gameObject.name : "NOTHING")); // 3
-            if (hit != null && hit.gameObject == this.gameObject) Click();
+        if (target == null) return;
+        if (Mouse.current == null || !Mouse.current.leftButton.wasPressedThisFrame) return;
+        if (Time.frameCount == lastConsumedFrame) return; // someone else already handled this frame's click
+
+        Vector2 mouseScreenPos = Mouse.current.position.ReadValue();
+        Vector2 mouseWorldPos = target.ScreenToWorldPoint(mouseScreenPos);
+        Collider2D hit = Physics2D.OverlapPoint(mouseWorldPos);
+
+        if (hit != null && hit.gameObject == this.gameObject){
+            lastConsumedFrame = Time.frameCount; // mark this frame's click as handled
+            Click();
         }
     }
-
     public void SetHighlighted(bool state){
         isHighlighted = state;
         print(sr.name + "exists");
@@ -40,12 +41,7 @@ public class CustomButton : MonoBehaviour
     }
 
     public void Click(){
-        Debug.Log("Button clicked: " + gameObject.name);
+        //Debug.Log("Button clicked: " + gameObject.name);
         onClick.Invoke();
-    }
-
-    // Optional: mouse support via collider click
-    void OnMouseDown(){
-        Click();
     }
 }

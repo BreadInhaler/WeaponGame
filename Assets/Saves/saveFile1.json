@@ -2,7 +2,7 @@
     "playerProfile": {
         "id": 1,
         "name": "Player 1",
-        "melleWeapon": "scythe",
+        "melleWeapon": "sword",
         "rangedWeapon": "bow"
     }
 }

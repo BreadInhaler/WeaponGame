@@ -1,28 +1,38 @@
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 class profilesMenuController : MonoBehaviour{
     public GameObject[] profiles;
     public bool editMode=false;
+    public GameObject conf;
     public void Init(bool manage){
-        for(byte i=0;i<profiles.Count() ;i++){
-            byte index = i;
+       RefreshMenu(manage);
+    }
+    void RefreshMenu(bool manage){
+        editMode = manage;
+
+        for (byte i = 0; i < profiles.Length; i++){
+            byte index = (byte)(i + 1);
             CustomButton[] buttons = profiles[i].GetComponentsInChildren<CustomButton>(true);
-            print("amount of buttons -> "+buttons.Length);
-            SaveData data = SaveSystem.LoadGameData(i);
-            if(data==null){
-                buttons[2].onClick.AddListener(()=>CreateNewProfile(index));
-            }
-            if(manage==true){
-                editMode=true;
-                buttons[0].gameObject.SetActive(true);
-                buttons[1].gameObject.SetActive(true);
-                buttons[2].gameObject.SetActive(false);
-            }else{
-                buttons[0].gameObject.SetActive(false);
-                buttons[1].gameObject.SetActive(false);
-                buttons[2].gameObject.SetActive(true);
-            }
+            SaveData data = SaveSystem.LoadGameData(index);
+            TextMeshPro text = profiles[i].GetComponentInChildren<TextMeshPro>();
+
+            bool hasProfile = data != null;
+            bool showManageButtons = manage && hasProfile;
+
+            buttons[0].gameObject.SetActive(showManageButtons);
+            buttons[1].gameObject.SetActive(showManageButtons);
+            buttons[2].gameObject.SetActive(!showManageButtons);
+
+            text.text = hasProfile ? data.playerProfile.name : "Empty";
+            buttons[2].GetComponentInChildren<TextMeshPro>().text = hasProfile ? "Select" : "Create";
+
+            buttons[1].onClick.RemoveAllListeners();
+            buttons[1].onClick.AddListener(() => OpenConfiramation(index));
+
+            buttons[2].onClick.RemoveAllListeners();
+            buttons[2].onClick.AddListener(() => CreateNewProfile(index));
         }
     }
     void Start(){
@@ -32,9 +42,28 @@ class profilesMenuController : MonoBehaviour{
     void CreateNewProfile(byte id){
         SaveData data = new SaveData();
         data.playerProfile = new PlayerSaveData();
-        data.playerProfile.id = (byte)(id+1);
-        data.playerProfile.name = "Player "+(byte)(id+1);
-        SaveSystem.SaveGameData(data,(byte)(id+1));
+        data.playerProfile.id = id;
+        data.playerProfile.name = "Player "+id;
+        SaveSystem.SaveGameData(data,id);
+        RefreshMenu(editMode);
+    }
+    void OpenConfiramation(byte id){
+        conf.SetActive(true);
+        CustomButton[] buttons = conf.GetComponentsInChildren<CustomButton>();
+        buttons[0].onClick.RemoveAllListeners();
+        buttons[0].onClick.AddListener(()=>DeleteProfile(id));
+
+        buttons[1].onClick.RemoveAllListeners();
+        buttons[1].onClick.AddListener(()=>CloseConfirmation());
+    }
+    void CloseConfirmation(){
+        conf.SetActive(false);
+        gameObject.SetActive(true);
+    }
+    void DeleteProfile(byte id){
+        SaveSystem.DeleteSaveData(id);
+        CloseConfirmation();
+        RefreshMenu(editMode);
     }
     void Back(){
         FindAnyObjectByType<MainMenuController>().menu.SetActive(true);

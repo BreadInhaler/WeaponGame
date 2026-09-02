@@ -81,4 +81,14 @@ static class SaveSystem{
             return null;
         }
     }
+    public static void DeleteSaveData(byte pathNumber){
+        Debug.Log("Deleting file at -> "+savePath+pathNumber+".json");
+        if(File.Exists(savePath+pathNumber+".json")) File.Delete(savePath+pathNumber+".json");
+        else Debug.Log("No file exists to delete");
+    }
+    public static void DeleteGlobalSaveData(){
+        Debug.Log("Deleting file at -> "+globalUnlocksSavePath+".json");
+        if(File.Exists(globalUnlocksSavePath+".json")) File.Delete(globalUnlocksSavePath+".json");
+        else Debug.Log("No file exists to delete");
+    }
 }
