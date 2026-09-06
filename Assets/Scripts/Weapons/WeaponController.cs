@@ -1,16 +1,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-class WeaponController : MonoBehaviour{
+public class WeaponController : MonoBehaviour{
     private RangedWeaponData rangedWeapon;
     private MelleWeaponData melleWeapon;
     [HideInInspector] public WeaponData selectedWeapon;
+    [HideInInspector] public WeaponProgress melleProgress;
+    [HideInInspector] public WeaponProgress rangedProgress;
     [HideInInspector] public Dictionary<StatType,float> finalStats = new Dictionary<StatType, float>();
     [HideInInspector] public byte attackIndex = 0;
     public float chargeTimer = 0;
     public float attackSpeedTimer= 0;
     public GameObject pivotTransform;
-    private GameObject pivotObject;
+    [HideInInspector]public GameObject pivotObject;
     private SpriteRenderer weaponHeld;
     [HideInInspector] public InputAction fireInput;
     [HideInInspector] public InputAction altFireInput;
@@ -56,53 +58,11 @@ class WeaponController : MonoBehaviour{
     }
     private void FireMelle(MelleWeaponData weapon,FireMode fireMode){
         if(attackIndex >= weapon.attackSequence.Count) attackIndex = 0;
-        Vector3 offset = new Vector3(0,0f,0);
-        Vector3 offsetPos = pivotObject.transform.position+pivotObject.transform.rotation * offset;
-        GameObject projectile = Instantiate(
-            weapon.attackSequence[attackIndex].attackType,
-            offsetPos,
-            pivotObject.transform.rotation
-        );
-        Camera.main.GetComponent<CameraShake>().Shake(0.1f,0.05f);
-        Projectile proj = projectile.GetComponent<Projectile>();
-        if(fireMode==FireMode.Charge){
-            proj.damage = weapon.damage*weapon.chargeModifier[StatType.damage];
-            proj.gameObject.transform.localScale = new Vector3(proj.gameObject.transform.localScale.x*weapon.size*weapon.chargeModifier[StatType.size],proj.gameObject.transform.localScale.x*weapon.size*weapon.chargeModifier[StatType.size],1);
-        }else{
-            proj.damage = weapon.damage;
-            proj.gameObject.transform.localScale = new Vector3(proj.gameObject.transform.localScale.x*weapon.size,proj.gameObject.transform.localScale.x*weapon.size,1);
-        }
-        //print("melle damage -> "+proj.damage);
-        proj.player = player;
+        weapon.Fire(this,attackIndex,fireMode);
         attackIndex++;
     }
     private void FireRanged(RangedWeaponData weapon,FireMode fireMode){
-        GameObject projectile = Instantiate(
-            weapon.projectilePrefabs[0],
-            pivotObject.transform.position,
-            pivotObject.transform.rotation
-        );
-        Projectile proj = projectile.GetComponent<Projectile>();
-        if(fireMode == FireMode.Charge){
-            if(finalStats.Count==0){
-                proj.damage = weapon.damage*weapon.chargeModifier[StatType.damage];
-                proj.speed = weapon.speed*weapon.chargeModifier[StatType.speed];
-                proj.peirce = weapon.pierce*weapon.chargeModifier[StatType.peirce];
-                proj.homingStrenght = weapon.homingStrenght*weapon.chargeModifier[StatType.homingStrenght];
-                proj.afterEffectSize = weapon.afterEffectSize*weapon.chargeModifier[StatType.afterEffectSize];
-            }
-        }else{
-            if(finalStats.Count==0){
-                proj.damage = weapon.damage;
-                proj.speed = weapon.speed;
-                proj.peirce = weapon.pierce;
-                proj.homingStrenght = weapon.homingStrenght;
-                proj.afterEffectSize = weapon.afterEffectSize;
-            }
-        }
-        proj.lifeTime = weapon.lifeTime;
-        proj.player = player;
-        proj.Init();
+        weapon.Fire(this,fireMode);
     }
     public void HandleFire(FireMode fireMode , InputAction input){
         print(Time.timeScale+" x fast");

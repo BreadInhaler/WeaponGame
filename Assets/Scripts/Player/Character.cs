@@ -3,6 +3,7 @@ using UnityEngine;
 public abstract class Character : MonoBehaviour , Idamageable{
     public CharacterStatsRuntime stats; 
     public CharacterStats baseStats;
+    public CharacterEffectsHandler effectsHandler;
     public virtual void Awake(){
         stats = new CharacterStatsRuntime{
             maxHP = baseStats.maxHP,
@@ -20,5 +21,8 @@ public abstract class Character : MonoBehaviour , Idamageable{
     public void RecieveHeal(float amount){
         stats.currentHP+=amount;
         if(stats.currentHP>stats.maxHP) stats.currentHP=stats.maxHP;
+    }
+    public void Die(){
+        effectsHandler.ApplyOnKillEffects();
     }
 }

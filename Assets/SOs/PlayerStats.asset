@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69d3cbe607d70a9469dee3d30f8dbf12, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: Assembly-CSharp::CharacterStats
-  maxHP: 1
+  maxHP: 100
   damage: 1
   defense: 1
   speed: 3

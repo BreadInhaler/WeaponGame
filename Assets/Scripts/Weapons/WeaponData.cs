@@ -10,6 +10,11 @@ public class WeaponData : ScriptableObject{
     public FireMode fireMode;
     public FireMode altFireMode;
 
+    protected virtual void OnKill(WeaponController controller,Enemy enemy){}
+    protected virtual void OnChargeRelease(WeaponController controller){}
+    protected virtual void OnHit(WeaponController controller, Enemy enemy, Projectile projectile){}
+    protected virtual void OnParry(WeaponController controller, Enemy enemy){}
+
     public float chargeTime;
     public List<StatModifier> modifiers = new List<StatModifier>{
         new StatModifier(StatType.damage,1),

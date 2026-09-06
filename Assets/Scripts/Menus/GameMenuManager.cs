@@ -1,6 +1,6 @@
 using UnityEngine;
 
-class GameMenuManager : MonoBehaviour{
+public class GameMenuManager : MonoBehaviour{
     public GameObject menuPanel;
     private CustomButton[] pauseButtons;
     bool menuOpen = false;

@@ -1,6 +1,6 @@
 using UnityEngine; 
 
-class Projectile : MonoBehaviour{
+public class Projectile : MonoBehaviour{
     public Player player;
     public Sprite sprite;
     public GameObject afterEffect;

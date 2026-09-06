@@ -32,3 +32,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3cf6603878d99194f9af469380e97171, type: 2}
   - {fileID: 11400000, guid: 3cf6603878d99194f9af469380e97171, type: 2}
   - {fileID: 11400000, guid: f07b4abf979f3f343b8878c8255bf830, type: 2}
+  chargedAttackData: {fileID: 11400000, guid: 3cf6603878d99194f9af469380e97171, type: 2}

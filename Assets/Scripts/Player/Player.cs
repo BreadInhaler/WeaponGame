@@ -3,7 +3,7 @@ using UnityEngine.InputSystem.Users;
 using UnityEngine;
 
 
-class Player : Character{
+public class Player : Character{
     public byte playerIndex;
     public byte playerID;
     [HideInInspector] public PlayerInput playerInput;
@@ -32,8 +32,6 @@ class Player : Character{
         //testInput.Enable();
         menuInput = playerInput.actions.FindAction("Menu");
         menuInput.Enable();
-
-        
     }
     public void LoadPlayer(string id){
         return;
