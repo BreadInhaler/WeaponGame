@@ -2,12 +2,13 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 
-class profilesMenuController : MonoBehaviour{
+class ProfilesMenuController : MonoBehaviour{
     public GameObject[] profiles;
     public bool editMode=false;
     public GameObject conf;
     public void Init(bool manage){
-       RefreshMenu(manage);
+        RefreshMenu(manage);
+        gameObject.GetComponent<ProfileButtonsSetupNavigation>().Init();
     }
     void RefreshMenu(bool manage){
         editMode = manage;
@@ -37,6 +38,7 @@ class profilesMenuController : MonoBehaviour{
     }
     void Start(){
         CustomButton backButton = GetComponentInChildren<CustomButton>();
+        backButton.onClick.RemoveAllListeners();
         backButton.onClick.AddListener(()=>Back());
     }
     void CreateNewProfile(byte id){
@@ -46,6 +48,7 @@ class profilesMenuController : MonoBehaviour{
         data.playerProfile.name = "Player "+id;
         SaveSystem.SaveGameData(data,id);
         RefreshMenu(editMode);
+        GetComponent<ProfileButtonsSetupNavigation>().RefreshOne((byte)(id-1)); // profile array index, not save id
     }
     void OpenConfiramation(byte id){
         conf.SetActive(true);

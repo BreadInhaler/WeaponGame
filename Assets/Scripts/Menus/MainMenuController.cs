@@ -1,5 +1,4 @@
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 class MainMenuController : MonoBehaviour{
@@ -18,7 +17,8 @@ class MainMenuController : MonoBehaviour{
     private void OpenProfiles(bool manage){
         profilesMenu.SetActive(true);
         menu.SetActive(false);
-        profilesMenu.GetComponent<profilesMenuController>().Init(manage);
+        profilesMenu.GetComponent<MultiPlayerMenuNavigator>().SetupPlayers(JoinManager.Instance.joinedPlayers);
+        profilesMenu.GetComponent<ProfilesMenuController>().Init(manage);
     }
     private void ExitGame(){
         Application.Quit();

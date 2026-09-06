@@ -1,0 +1,8 @@
+{
+    "playerProfile": {
+        "id": 5,
+        "name": "Player 5",
+        "melleWeapon": "sword",
+        "rangedWeapon": "bow"
+    }
+}

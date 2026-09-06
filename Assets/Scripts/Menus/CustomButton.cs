@@ -11,6 +11,11 @@ public class CustomButton : MonoBehaviour{
     private Camera target;
     private bool isHighlighted;
     private static int lastConsumedFrame = -1; // shared across ALL buttons
+    [Header("Navigation")]
+    public CustomButton up;
+    public CustomButton down;
+    public CustomButton left;
+    public CustomButton right;
     void Awake(){
         sr = GetComponentInChildren<SpriteRenderer>();
         SetHighlighted(false);

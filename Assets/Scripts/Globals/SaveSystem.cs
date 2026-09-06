@@ -63,10 +63,10 @@ static class SaveSystem{
         if(File.Exists(savePath+pathNumber+".json")){
            string json = File.ReadAllText(savePath+pathNumber+".json");
            SaveData data = JsonUtility.FromJson<SaveData>(json);
-           Debug.Log("Game loaded from -> "+savePath+pathNumber+".json");
+           //Debug.Log("Game loaded from -> "+savePath+pathNumber+".json");
            return data;
         }else{
-            Debug.LogWarning("Save file not found at: " + savePath+pathNumber+".json");
+            //Debug.LogWarning("Save file not found at: " + savePath+pathNumber+".json");
             return null;
         }
     }

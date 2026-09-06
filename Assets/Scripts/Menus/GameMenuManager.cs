@@ -5,13 +5,13 @@ class GameMenuManager : MonoBehaviour{
     private CustomButton[] pauseButtons;
     bool menuOpen = false;
     Player player;
-    MenuNavigator navigator;
+    VerticalMenuNavigator navigator;
     void Start(){
         menuPanel.SetActive(false);
         pauseButtons = menuPanel.GetComponentsInChildren<CustomButton>();
 
         pauseButtons[0].onClick.AddListener(()=>Resume()); 
-        navigator = menuPanel.GetComponentInChildren<MenuNavigator>();
+        navigator = menuPanel.GetComponentInChildren<VerticalMenuNavigator>();
         navigator.buttons = pauseButtons;
         //ArrangeButtonsVertically();
     }

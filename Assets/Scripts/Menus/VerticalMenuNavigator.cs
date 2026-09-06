@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
 
-public class MenuNavigator : MonoBehaviour
+public class VerticalMenuNavigator : MonoBehaviour
 {
     public PlayerInput playerInput; // assign THIS player's PlayerInput
     public CustomButton[] buttons;
