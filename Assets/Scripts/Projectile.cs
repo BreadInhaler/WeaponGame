@@ -1,8 +1,8 @@
+using UnityEditor.Tilemaps;
 using UnityEngine; 
 
 public class Projectile : MonoBehaviour{
     public Player player;
-    public Sprite sprite;
     public GameObject afterEffect;
     public float lifeTime;
     public float peirce;
@@ -10,6 +10,8 @@ public class Projectile : MonoBehaviour{
     public float damage;
     public float homingStrenght;
     public float afterEffectSize;
+    public StatusEffectData statusEffect;
+    public WeaponEffect[] weaponEffects;
     public float timer;
     public void Init(){
         timer = 0f;
@@ -29,15 +31,25 @@ public class Projectile : MonoBehaviour{
     }
     protected virtual void OnHit(Idamageable character){
         character.TakeDamage(damage);
+    }
+    protected virtual void OnHit(Enemy character){
+        bool died = character.TakeDamage(damage);
         if(player==null) return;
+        foreach(var fx in weaponEffects) fx.OnHit(player.weaponController,character);
+        if(statusEffect!=null) statusEffect.Apply(character.effectsHandler);
+        if(died) foreach(var fx in weaponEffects) fx.OnKill(player.weaponController,character);
         player.RecieveHeal(player.weaponController.selectedWeapon.lifeSteal*damage);
     }
     protected virtual void OnTriggerEnter2D(Collider2D collider){
-        print(collider.name);
+        print(collider.name+" was hit");
         Idamageable character = collider.GetComponent<Idamageable>();
+        Enemy enemy = collider.GetComponent<Enemy>();
         if(peirce<=0) Die();
-        if(character!=null) OnHit(character);
-        else Die();
+        if(enemy!=null) OnHit(enemy);
+        else{
+            if(character!=null) OnHit(character);
+            else Die();
+        }
         peirce--;
     }
     private void Die(){

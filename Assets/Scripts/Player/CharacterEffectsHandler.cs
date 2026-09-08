@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 public class CharacterEffectsHandler{
     public Character character;
@@ -16,22 +17,21 @@ public class CharacterEffectsHandler{
                 effect.tickTimer-=effect.effectData.tickInterval;
                 effect.OnTick(this);
             }
-            if(effect.effectData.duration <= effect.elapsedTime){
-                effect.OnRemove(this);
-            }
+            if(effect.effectData.duration <= effect.elapsedTime) effect.OnExpire(this);
         }
     }
     public void ApplyStatusEffect(StatusEffectRuntime effect){
         statusEffects.Add(effect);
+        character.stats = character.RefreshStats();
         //print(gameObject.name+" recieved "+effect.effectData.id);
     }
     public void RemoveStatusEffect(StatusEffectRuntime effect){
         statusEffects.Remove(effect);
+        character.stats = character.RefreshStats();
     }
     public void RemoveAllStatusEffects(){
-        List<StatusEffectRuntime> toRemove = new List<StatusEffectRuntime>(statusEffects);
-        foreach(StatusEffectRuntime effect in toRemove){
-            effect.OnRemove(this);
+        for(int i=statusEffects.Count-1;i>=0;i--){
+            statusEffects[i].OnRemove(this);
         }
         statusEffects.Clear();
     }

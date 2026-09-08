@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MelleWeaponData
   id: sword
   sprite: {fileID: 21300000, guid: 16b471586f4becc48a68bd8561694af6, type: 3}
-  damage: 10
+  damage: 5
   lifeSteal: 0
   firerate: 0.2
   fireMode: 2
   altFireMode: 1
   chargeTime: 1
+  skillTree: {fileID: 11400000, guid: 05316d3aac3f2494297abafe66ae14a9, type: 2}
   modifiers:
   - statType: 0
     value: 1

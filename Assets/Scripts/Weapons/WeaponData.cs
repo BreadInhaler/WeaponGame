@@ -9,20 +9,13 @@ public class WeaponData : ScriptableObject{
     public float firerate;
     public FireMode fireMode;
     public FireMode altFireMode;
-
-    protected virtual void OnKill(WeaponController controller,Enemy enemy){}
-    protected virtual void OnChargeRelease(WeaponController controller){}
-    protected virtual void OnHit(WeaponController controller, Enemy enemy, Projectile projectile){}
-    protected virtual void OnParry(WeaponController controller, Enemy enemy){}
+    public WeaponEffect[] weaponEffects;
 
     public float chargeTime;
+    public SkillTree skillTree;
     public List<StatModifier> modifiers = new List<StatModifier>{
         new StatModifier(StatType.damage,1),
         new StatModifier(StatType.speed,1),
-        new StatModifier(StatType.firerate,1),
-        new StatModifier(StatType.peirce,1),
-        new StatModifier(StatType.homingStrenght,1),
-        new StatModifier(StatType.afterEffectSize,1),
     };
     private Dictionary<StatType,float> _chargeModifierDict;
     public Dictionary<StatType, float> chargeModifier {

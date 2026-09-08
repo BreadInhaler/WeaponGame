@@ -9,6 +9,15 @@ public class RangedWeaponData : WeaponData{
     public byte pierce;
     public float lifeTime;
     public float afterEffectSize;
+    void Reset(){
+        modifiers = new List<StatModifier>{
+            new StatModifier(StatType.damage,1),
+            new StatModifier(StatType.speed,1),
+            new StatModifier(StatType.peirce,1),
+            new StatModifier(StatType.homingStrenght,1),
+            new StatModifier(StatType.afterEffectSize,1),
+        };
+    }
     public virtual void Fire(WeaponController controller, FireMode fireMode){
         GameObject projectile = Instantiate(
             projectilePrefabs[0],

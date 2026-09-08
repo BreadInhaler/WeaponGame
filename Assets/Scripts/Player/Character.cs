@@ -13,10 +13,16 @@ public abstract class Character : MonoBehaviour , Idamageable{
             defense = baseStats.defense
         };
     }
-    public void TakeDamage(float damage){
+    public bool TakeDamage(float damage){
         float finalDamage = damage - stats.defense;
         if(finalDamage<1) stats.currentHP-=1;
         else stats.currentHP-=finalDamage;
+        return stats.currentHP <=0;
+    }
+    public bool TakeDamageIgnoreDefense(float damage){
+        if(damage<1) stats.currentHP-=1;
+        else stats.currentHP-=damage;
+        return stats.currentHP <=0;
     }
     public void RecieveHeal(float amount){
         stats.currentHP+=amount;
@@ -24,5 +30,11 @@ public abstract class Character : MonoBehaviour , Idamageable{
     }
     public void Die(){
         effectsHandler.ApplyOnKillEffects();
+    }
+    public CharacterStatsRuntime RefreshStats(){
+        CharacterStatsRuntime current=stats.CloneStats();
+        foreach(StatusEffectRuntime effect in effectsHandler.GetStatusEffects()) effect.ModifyStats(current);
+        //print(gameObject.name+" 's defense: "+current.defense);
+        return current;
     }
 }

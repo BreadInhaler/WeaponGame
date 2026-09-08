@@ -1,3 +1,3 @@
 public interface Idamageable{
-    public void TakeDamage(float damage);
+    public bool TakeDamage(float damage);
 }

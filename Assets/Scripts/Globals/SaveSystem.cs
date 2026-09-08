@@ -3,7 +3,7 @@ using System.IO;
 using UnityEngine;
 [System.Serializable]
 class SaveData{
-    public PlayerSaveData playerProfile;
+    public PlayerSaveData playerProfile = new PlayerSaveData();
 }
 [System.Serializable]
 class GlobalSaveData{
@@ -27,16 +27,13 @@ class PlayerSaveData{
     public string name;
     public string melleWeapon="sword";
     public string rangedWeapon="bow";
+    public WeaponProgressData melleProgressData = new WeaponProgressData();
+    public WeaponProgressData rangedProgressData = new WeaponProgressData();
 }
 [System.Serializable]
 class WeaponProgressData{
-    public string id;
-    public List<SkillNodeData> nodes = new List<SkillNodeData>();
-}
-[System.Serializable]
-class SkillNodeData{
-    public string id;
-    public byte upgradeCount;
+    public string weaponID;
+    public List<string> nodes = new List<string>();
 }
 
 static class SaveSystem{

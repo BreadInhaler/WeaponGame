@@ -6,7 +6,7 @@ public class SkillNode : ScriptableObject{
     public StatType statType;
     public float statAmount;
     public int upgradeCost;
-    public byte maxUpgrades;
+    public StatusEffectData statusEffect;
     public List<SkillNode> prevNodes = new List<SkillNode>();
     public List<SkillNode> nextNodes = new List<SkillNode>();
 }

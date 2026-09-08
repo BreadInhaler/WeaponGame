@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(menuName = "SkillTree")]
-class SkillTree : ScriptableObject{
-    SkillNode rootNode;
-    List<SkillNode> allNodes = new List<SkillNode>();
+public class SkillTree : ScriptableObject{
+    public SkillNode rootNode;
+    public List<SkillNode> allNodes = new List<SkillNode>();
 }

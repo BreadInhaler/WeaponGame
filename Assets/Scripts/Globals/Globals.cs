@@ -10,7 +10,8 @@ public enum StatType{
     projAmount, 
     homingStrenght, 
     afterEffectSize,
-    prefabIndex
+    prefabIndex,
+    altFireUnlocked
 }
 public enum FireMode{
     None,

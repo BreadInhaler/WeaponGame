@@ -16,20 +16,21 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 95bedc2cb43b51e44bbaffe40e1f8e6c, type: 3}
   damage: 10
   lifeSteal: 0.1
-  firerate: 1
+  firerate: 0.4
   fireMode: 2
   altFireMode: 1
+  weaponEffects:
+  - {fileID: 11400000, guid: 5ec5567ea2b356143a46c386a83d60c7, type: 2}
+  - {fileID: 11400000, guid: ffe726a355280d84d8ed3c3b59683639, type: 2}
   chargeTime: 1
+  skillTree: {fileID: 11400000, guid: 4cec07dace026b34586bc0cb1f7393ef, type: 2}
   modifiers:
   - statType: 0
     value: 2
-  - statType: 7
-    value: 1
   - statType: 2
     value: 1.5
-  size: 3
+  size: 1.5
   attackSequence:
-  - {fileID: 11400000, guid: 3cf6603878d99194f9af469380e97171, type: 2}
   - {fileID: 11400000, guid: 3cf6603878d99194f9af469380e97171, type: 2}
   - {fileID: 11400000, guid: f07b4abf979f3f343b8878c8255bf830, type: 2}
   chargedAttackData: {fileID: 11400000, guid: 3cf6603878d99194f9af469380e97171, type: 2}

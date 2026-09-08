@@ -43,9 +43,14 @@ class ProfilesMenuController : MonoBehaviour{
     }
     void CreateNewProfile(byte id){
         SaveData data = new SaveData();
-        data.playerProfile = new PlayerSaveData();
         data.playerProfile.id = id;
         data.playerProfile.name = "Player "+id;
+        data.playerProfile.melleWeapon = "scythe";
+        data.playerProfile.rangedWeapon = "bow";
+        data.playerProfile.melleProgressData.weaponID = data.playerProfile.melleWeapon;
+        data.playerProfile.rangedProgressData.weaponID = data.playerProfile.rangedWeapon;
+        data.playerProfile.melleProgressData.nodes.Add(data.playerProfile.melleWeapon+"_root"); 
+        data.playerProfile.rangedProgressData.nodes.Add(data.playerProfile.rangedWeapon+"_root"); 
         SaveSystem.SaveGameData(data,id);
         RefreshMenu(editMode);
         GetComponent<ProfileButtonsSetupNavigation>().RefreshOne((byte)(id-1)); // profile array index, not save id
@@ -67,6 +72,7 @@ class ProfilesMenuController : MonoBehaviour{
         SaveSystem.DeleteSaveData(id);
         CloseConfirmation();
         RefreshMenu(editMode);
+        GetComponent<ProfileButtonsSetupNavigation>().RefreshOne((byte)(id-1)); // profile array index, not save id
     }
     void Back(){
         FindAnyObjectByType<MainMenuController>().menu.SetActive(true);

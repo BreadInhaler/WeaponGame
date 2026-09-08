@@ -5,10 +5,13 @@ public class WeaponController : MonoBehaviour{
     private RangedWeaponData rangedWeapon;
     private MelleWeaponData melleWeapon;
     [HideInInspector] public WeaponData selectedWeapon;
-    [HideInInspector] public WeaponProgress melleProgress;
-    [HideInInspector] public WeaponProgress rangedProgress;
-    [HideInInspector] public Dictionary<StatType,float> finalStats = new Dictionary<StatType, float>();
+    public WeaponProgress melleProgress = new WeaponProgress();
+    public WeaponProgress rangedProgress = new WeaponProgress();
+    public StatusEffectData currentEffect;
+    public Dictionary<StatType,float> finalStats = new Dictionary<StatType, float>();
     [HideInInspector] public byte attackIndex = 0;
+    [HideInInspector] public FireMode lastAttack;
+    [HideInInspector] public bool altFireUnlocked=false;
     public float chargeTimer = 0;
     public float attackSpeedTimer= 0;
     public GameObject pivotTransform;
@@ -28,18 +31,13 @@ public class WeaponController : MonoBehaviour{
         pivotObject = pivotTransform.GetComponentInChildren<SpriteRenderer>().gameObject;
         weaponHeld = player.GetComponentsInChildren<SpriteRenderer>()[2];
         SwitchWeapon();
-        /*fireInput = InputSystem.actions.FindAction("Fire");
-        fireInput.Enable();
-        altFireInput = InputSystem.actions.FindAction("AltFire");
-        altFireInput.Enable();
-        switchWeaponInput = InputSystem.actions.FindAction("SwitchWeapon");
-        switchWeaponInput.Enable();*/
         fireInput = player.playerInput.actions.FindAction("Fire");
         fireInput.Enable();
         altFireInput = player.playerInput.actions.FindAction("AltFire");
         altFireInput.Enable();
         switchWeaponInput = player.playerInput.actions.FindAction("SwitchWeapon");
         switchWeaponInput.Enable();
+        melleProgress.Init(this,melleWeapon);
     }
     public void Update(){
         if(GameManager.Instance.IsPaused()) return;
@@ -57,6 +55,7 @@ public class WeaponController : MonoBehaviour{
         return;
     }
     private void FireMelle(MelleWeaponData weapon,FireMode fireMode){
+        lastAttack = fireMode;
         if(attackIndex >= weapon.attackSequence.Count) attackIndex = 0;
         weapon.Fire(this,attackIndex,fireMode);
         attackIndex++;
@@ -64,19 +63,19 @@ public class WeaponController : MonoBehaviour{
     private void FireRanged(RangedWeaponData weapon,FireMode fireMode){
         weapon.Fire(this,fireMode);
     }
-    public void HandleFire(FireMode fireMode , InputAction input){
+    public void HandleFire(FireMode fireMode,InputAction input){
         print(Time.timeScale+" x fast");
         switch(fireMode){
             case FireMode.AutoFire:
-                if(input.IsPressed()) {
-                    if(attackSpeedTimer>=selectedWeapon.firerate){
-                        attackSpeedTimer=0;
-                        if(selectedWeapon.GetType() == melleWeapon.GetType()) FireMelle(selectedWeapon as MelleWeaponData,fireMode);
-                        else FireRanged(selectedWeapon as RangedWeaponData,fireMode);
-                    }
+                if(input.IsPressed()==false) return;
+                if(attackSpeedTimer>=selectedWeapon.firerate){
+                    attackSpeedTimer=0;
+                    if(selectedWeapon.GetType() == melleWeapon.GetType()) FireMelle(selectedWeapon as MelleWeaponData,fireMode);
+                    else FireRanged(selectedWeapon as RangedWeaponData,fireMode);
                 }
                 break;
             case FireMode.Charge:
+                if(!altFireUnlocked) return;
                 if(input.IsPressed()) chargeTimer+=Time.deltaTime;
                 if(input.WasReleasedThisFrame()){
                     if(selectedWeapon is MelleWeaponData chargedMelle) if(chargeTimer>=chargedMelle.chargeTime) FireMelle(melleWeapon,fireMode);
@@ -89,6 +88,8 @@ public class WeaponController : MonoBehaviour{
         }
     }
     public void RecalculateStats(){
-        return;
+        //if(!finalStats.ContainsKey(StatType.altFireUnlocked)) return;
+        if(finalStats[StatType.altFireUnlocked]>0) altFireUnlocked=true;
+        else altFireUnlocked=false;
     }
 }
