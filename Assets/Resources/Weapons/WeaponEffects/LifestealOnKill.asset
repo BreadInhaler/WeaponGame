@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: LifestealOnKill
+  m_Script: {fileID: 11500000, guid: 2fd22bada43fedc48a9be537b341697f, type: 3}
+  m_Name: LifeStealOnKill
   m_EditorClassIdentifier: Assembly-CSharp::LifestealOnKillEffect
-  healPercentOfDamage: 0.3
+  does: 00010000
+  healPercentOfDamage: 0.1

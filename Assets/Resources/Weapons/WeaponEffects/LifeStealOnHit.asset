@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 167fc4c5b4dfa234091934dcd1f3bb6f, type: 3}
   m_Name: LifeStealOnHit
   m_EditorClassIdentifier: Assembly-CSharp::LifestealOnHitEffect
+  does: 01000000
   healPercentOfDamage: 0.1

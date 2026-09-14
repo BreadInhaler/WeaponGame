@@ -4,6 +4,8 @@ using UnityEngine;
 
 
 public class Player : Character{
+    public GameMenuManager menuManager;
+    public Animator animator;
     public byte playerIndex;
     public byte playerID;
     [HideInInspector] public PlayerInput playerInput;
@@ -13,6 +15,7 @@ public class Player : Character{
     public GameMenuManager gameMenu;
     public override void Awake(){
         base.Awake();
+        animator = GetComponentInChildren<Animator>();
         playerInput=GetComponent<PlayerInput>();
         weaponController = GetComponent<WeaponController>();
         playerInput.user.UnpairDevices();
@@ -33,6 +36,24 @@ public class Player : Character{
         menuInput = playerInput.actions.FindAction("Menu");
         menuInput.Enable();
     }
+    public override bool TakeDamage(float damage){
+        float finalDamage = damage - stats.defense;
+        if(finalDamage<1) stats.currentHP-=1;
+        else stats.currentHP-=finalDamage;
+        menuManager.HUDPanel.GetComponent<HUDHandler>().UpdateHealthBar(playerIndex,stats.currentHP,stats.maxHP);
+        return stats.currentHP <=0;
+    }
+    public override bool TakeDamageIgnoreDefense(float damage){
+        if(damage<1) stats.currentHP-=1;
+        else stats.currentHP-=damage;
+        menuManager.HUDPanel.GetComponent<HUDHandler>().UpdateHealthBar(playerIndex,stats.currentHP,stats.maxHP);
+        return stats.currentHP <=0;
+    }
+    public override void RecieveHeal(float amount){
+        base.RecieveHeal(amount);
+        menuManager.HUDPanel.GetComponent<HUDHandler>().UpdateHealthBar(playerIndex,stats.currentHP,stats.maxHP);
+    }
+    
     public void LoadPlayer(string id){
         return;
     }

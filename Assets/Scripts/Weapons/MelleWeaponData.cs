@@ -41,6 +41,7 @@ public class MelleWeaponData : WeaponData{
             proj.damage = damage;
             proj.gameObject.transform.localScale = new Vector3(proj.gameObject.transform.localScale.x*size,proj.gameObject.transform.localScale.x*size,1);
         }
+        proj.weaponEffects = weaponEffects;
         proj.statusEffect = statusEffect;
         //print("melle damage -> "+proj.damage);
         proj.player = controller.player;

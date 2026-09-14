@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 761dd403dbdddaa409c2095c28043d9a, type: 3}
-  m_Name: Thrust
+  m_Name: SlamAttack
   m_EditorClassIdentifier: Assembly-CSharp::AttackData
-  id: thrust
-  attackType: {fileID: 5148231237616894681, guid: 18032e1b76ded47489d6e476e5f5d221, type: 3}
+  id: slam
+  attackType: {fileID: 5148231237616894681, guid: ea8b7d1887f8c2d4d9bc899b264feae4, type: 3}

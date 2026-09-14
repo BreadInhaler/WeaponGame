@@ -15,4 +15,4 @@ MonoBehaviour:
   maxHP: 100
   damage: 1
   defense: 1
-  speed: 3
+  speed: 2

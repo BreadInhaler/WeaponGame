@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aebffd31aff47424fbb7dc79d49d2830, type: 3}
+  m_Name: Hammer
+  m_EditorClassIdentifier: Assembly-CSharp::MelleWeaponData
+  id: hammer
+  sprite: {fileID: 21300000, guid: 7428a5b051debd547a5a632d38edf338, type: 3}
+  damage: 15
+  firerate: 1
+  fireMode: 1
+  altFireMode: 0
+  weaponEffects: []
+  chargeTime: 2
+  skillTree: {fileID: 0}
+  modifiers:
+  - statType: 0
+    value: 1
+  - statType: 2
+    value: 1
+  size: 5
+  attackSequence:
+  - {fileID: 11400000, guid: e404c8289dcc70741a6423e632bd5eac, type: 2}
+  chargedAttackData: {fileID: 11400000, guid: e404c8289dcc70741a6423e632bd5eac, type: 2}

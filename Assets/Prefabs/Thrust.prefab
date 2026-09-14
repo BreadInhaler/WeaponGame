@@ -47,14 +47,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
   player: {fileID: 0}
-  sprite: {fileID: 0}
   afterEffect: {fileID: 0}
   lifeTime: 0.1
   peirce: 9999
-  speed: 0
+  speed: 2
   damage: 0
   homingStrenght: 0
   afterEffectSize: 0
+  statusEffect: {fileID: 0}
+  weaponEffects: []
   timer: 0
 --- !u!61 &8350256253712778466
 BoxCollider2D:
@@ -90,7 +91,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.3}
+  m_Offset: {x: 0, y: 0.1}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -100,7 +101,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.21645051, y: 0.76}
+  m_Size: {x: 0.1, y: 0.3}
   m_EdgeRadius: 0
 --- !u!1 &6127281102969094285
 GameObject:
@@ -128,8 +129,8 @@ Transform:
   m_GameObject: {fileID: 6127281102969094285}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.3, z: 0}
-  m_LocalScale: {x: 0.2035, y: 0.4, z: 1}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2533440821516001468}
@@ -183,7 +184,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4427c069aa8de5640b53af63dc6d9c41, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

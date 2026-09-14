@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
-using UnityEngine;
 public class CharacterEffectsHandler{
     public Character character;
     List<StatusEffectRuntime> statusEffects = new List<StatusEffectRuntime>();
@@ -30,17 +28,13 @@ public class CharacterEffectsHandler{
         character.stats = character.RefreshStats();
     }
     public void RemoveAllStatusEffects(){
-        for(int i=statusEffects.Count-1;i>=0;i--){
-            statusEffects[i].OnRemove(this);
-        }
+        for(int i=statusEffects.Count-1;i>=0;i--) statusEffects[i].OnRemove(this);
         statusEffects.Clear();
     }
     public List<StatusEffectRuntime> GetStatusEffects(){
         return this.statusEffects;
     }
     public void ApplyOnKillEffects(){
-        for(byte i=0;i<statusEffects.Count;i++){
-            statusEffects[i].OnKill(this);
-        }
+        for(byte i=0;i<statusEffects.Count;i++) statusEffects[i].OnKill(this);
     }
 }

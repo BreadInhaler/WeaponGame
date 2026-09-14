@@ -1,0 +1,21 @@
+{
+    "playerProfile": {
+        "id": 1,
+        "name": "Player 1",
+        "melleWeapon": "scythe",
+        "rangedWeapon": "bow",
+        "melleProgressData": {
+            "weaponID": "scythe",
+            "nodes": [
+                "scythe_root",
+                "scythe_1"
+            ]
+        },
+        "rangedProgressData": {
+            "weaponID": "bow",
+            "nodes": [
+                "bow_root"
+            ]
+        }
+    }
+}

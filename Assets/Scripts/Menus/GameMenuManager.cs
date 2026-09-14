@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class GameMenuManager : MonoBehaviour{
     public GameObject menuPanel;
+    public GameObject HUDPanel;
     private CustomButton[] pauseButtons;
     bool menuOpen = false;
     Player player;

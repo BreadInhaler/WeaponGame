@@ -19,7 +19,9 @@ MonoBehaviour:
   firerate: 0.3
   fireMode: 1
   altFireMode: 2
+  weaponEffects: []
   chargeTime: 1
+  skillTree: {fileID: 0}
   modifiers:
   - statType: 0
     value: 10
@@ -34,7 +36,7 @@ MonoBehaviour:
   - statType: 7
     value: 1
   projectilePrefabs:
-  - {fileID: 5148231237616894681, guid: d09dce2fabc717f47a807a19b83f9d74, type: 3}
+  - {fileID: 5148231237616894681, guid: d87cb279657290d498d3ec516a9beef9, type: 3}
   speed: 10
   homingStrenght: 1
   projectileCount: 1

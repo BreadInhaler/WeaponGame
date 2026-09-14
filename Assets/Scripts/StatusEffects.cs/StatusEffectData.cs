@@ -29,15 +29,3 @@ public abstract class StatusEffectData : ScriptableObject {
         newEffect.OnApply(character); // one-time setup hook (VFX, etc.), not the stack logic anymore
     }
 }
-[CreateAssetMenu(menuName = "Effect/Fire",fileName = "FireEffect")]
-public class FireEffectData : StatusEffectData{
-    public override StatusEffectRuntime CreateEffectInstance(){return new FireEffect(this);}
-}
-[CreateAssetMenu(menuName = "Effect/DefenseBreak",fileName = "DefenseBreakEffect")]
-public class DefenseBreakEffectData : StatusEffectData{
-    public override StatusEffectRuntime CreateEffectInstance(){return new DefenseBreakEffect(this);}
-}
-[CreateAssetMenu(menuName = "Effect/DeathMarked",fileName = "DeathMarked")]
-public class DeathMarkedEffectData : StatusEffectData{
-    public override StatusEffectRuntime CreateEffectInstance(){return new DeathMarkedEffect(this);}
-}

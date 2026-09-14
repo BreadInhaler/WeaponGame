@@ -35,10 +35,9 @@ public class Projectile : MonoBehaviour{
     protected virtual void OnHit(Enemy character){
         bool died = character.TakeDamage(damage);
         if(player==null) return;
-        foreach(var fx in weaponEffects) fx.OnHit(player.weaponController,character);
+        foreach(var fx in weaponEffects) if(fx.does[0])fx.OnHit(player.weaponController,character);
         if(statusEffect!=null) statusEffect.Apply(character.effectsHandler);
-        if(died) foreach(var fx in weaponEffects) fx.OnKill(player.weaponController,character);
-        player.RecieveHeal(player.weaponController.selectedWeapon.lifeSteal*damage);
+        if(died) foreach(var fx in weaponEffects) if(fx.does[1])fx.OnKill(player.weaponController,character);
     }
     protected virtual void OnTriggerEnter2D(Collider2D collider){
         print(collider.name+" was hit");

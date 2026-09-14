@@ -5,7 +5,6 @@ public class WeaponData : ScriptableObject{
     public string id;
     public Sprite sprite;
     public float damage;
-    public float lifeSteal;
     public float firerate;
     public FireMode fireMode;
     public FireMode altFireMode;

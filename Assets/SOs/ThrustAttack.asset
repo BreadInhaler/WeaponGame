@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 761dd403dbdddaa409c2095c28043d9a, type: 3}
-  m_Name: Slash
+  m_Name: ThrustAttack
   m_EditorClassIdentifier: Assembly-CSharp::AttackData
-  id: slash
-  attackType: {fileID: 5148231237616894681, guid: a82f8bc3644af3e4b9a445cc83e98afa, type: 3}
+  id: thrust
+  attackType: {fileID: 5148231237616894681, guid: 18032e1b76ded47489d6e476e5f5d221, type: 3}
